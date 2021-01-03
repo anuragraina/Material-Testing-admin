@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 
 import '../../services/auth.dart';
-import '../../widgets/error_screen.dart';
+import '../../screens/error_screen.dart';
 
 class SignIn extends StatefulWidget {
   @override

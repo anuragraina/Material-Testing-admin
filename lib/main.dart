@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 // Import the firebase_core plugin
 import 'package:firebase_core/firebase_core.dart';
-import './widgets/error_screen.dart';
 
 import './app.dart';
-import './widgets/loader.dart';
+import 'screens/error_screen.dart';
+import 'screens/loader.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
