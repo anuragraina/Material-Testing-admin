@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class ApprovedTests extends StatelessWidget {
+class AddUser extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Approved Tests'),
+        title: Text('Add User'),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,

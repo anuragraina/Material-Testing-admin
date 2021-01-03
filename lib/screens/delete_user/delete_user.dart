@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class ApprovedTests extends StatelessWidget {
+class DeleteUser extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Approved Tests'),
+        title: Text('Delete User'),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
