@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import '../../widgets/test_type.dart';
 import '../../services/auth.dart';
 
-class MyHomePage extends StatelessWidget {
+class TestAnalysis extends StatelessWidget {
   final AuthService _auth = AuthService();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Testing'),
+        title: Text('Test Analysis'),
         actions: <Widget>[
           FlatButton.icon(
             textColor: Colors.white,
