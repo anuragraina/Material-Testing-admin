@@ -13,11 +13,15 @@ class MyHomePage extends StatelessWidget {
         title: Text('Testing'),
         actions: <Widget>[
           FlatButton.icon(
+            textColor: Colors.white,
             onPressed: () async {
               await _auth.logOut();
             },
             icon: Icon(Icons.person),
-            label: Text('Logout'),
+            label: Text(
+              'Logout',
+              style: TextStyle(fontSize: 18),
+            ),
           )
         ],
       ),
@@ -26,7 +30,7 @@ class MyHomePage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             TestType(name: 'Pending Tests', route: '/pending-tests'),
-            TestType(name: 'Approved Tests', route: '/pending-tests'),
+            TestType(name: 'Approved Tests', route: '/approved-tests'),
           ],
         ),
       ),
