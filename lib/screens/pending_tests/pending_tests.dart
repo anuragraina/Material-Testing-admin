@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import '../../services/database.dart';
 
@@ -19,20 +20,29 @@ class PendingTests extends StatelessWidget {
           }
 
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Text("Loading");
+            return Center(child: Text("Loading"));
           }
 
           return Padding(
             padding: EdgeInsets.all(10),
-            child: new ListView(
+            child: ListView(
               children: snapshot.data.documents.map<Widget>((document) {
-                return new Card(
-                  child: new ListTile(
-                    title: new Text(document.data()['test_name']),
-                    subtitle: new Text(document.data()['test_category']),
-                    trailing: new Text(DateTime.fromMicrosecondsSinceEpoch(
-                            document.data()['created_on'].microsecondsSinceEpoch)
-                        .toString()),
+                DateTime time = DateTime.fromMicrosecondsSinceEpoch(
+                    document.data()['created_on'].microsecondsSinceEpoch);
+
+                String formattedTime = DateFormat('d MMM, yyyy – hh:mm aaa').format(time);
+
+                return Card(
+                  child: ListTile(
+                    title: Text(document.data()['test_name']),
+                    subtitle: Text(document.data()['test_category']),
+                    trailing: Text(
+                      formattedTime,
+                      style: TextStyle(
+                        color: Colors.grey[600],
+                        fontStyle: FontStyle.italic,
+                      ),
+                    ),
                   ),
                   margin: EdgeInsets.symmetric(vertical: 10, horizontal: 25),
                 );
