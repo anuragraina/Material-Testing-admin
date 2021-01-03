@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 // Import the firebase_core plugin
 import 'package:firebase_core/firebase_core.dart';
 
-//import './app.dart';
+import './app.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -27,8 +27,7 @@ class MyApp extends StatelessWidget {
 
         // Once complete, show your application
         if (snapshot.connectionState == ConnectionState.done) {
-          return MaterialApp(home: Text('Done'));
-          //return App();
+          return App();
         }
 
         // Otherwise, show something whilst waiting for initialization to complete
