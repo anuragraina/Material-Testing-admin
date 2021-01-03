@@ -1,3 +1,5 @@
+//CHange the folder name
+
 import 'package:flutter/material.dart';
 
 import '../../widgets/test_type.dart';
@@ -10,7 +12,7 @@ class ManageUsers extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Test Analysis'),
+        title: Text('Manage Users'),
         actions: <Widget>[
           FlatButton.icon(
             textColor: Colors.white,

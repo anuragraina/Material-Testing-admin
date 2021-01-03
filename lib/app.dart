@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import './screens/delete_user/delete_user.dart';
 import './screens/update_user/update_user.dart';
 import './screens/add_user/add_user.dart';
-import './screens/Manage_Users/manage_users.dart';
-import './screens/Test_Analysis/test_analysis.dart';
+import './screens/manage_user/manage_users.dart';
+import './screens/tests_analysis/test_analysis.dart';
 import './screens/home_page/main_home.dart';
 import 'package:provider/provider.dart';
 

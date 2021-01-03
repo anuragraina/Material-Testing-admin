@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 // Import the firebase_core plugin
 import 'package:firebase_core/firebase_core.dart';
+import './widgets/error_screen.dart';
 
 import './app.dart';
 import './widgets/loader.dart';
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
       builder: (context, snapshot) {
         // Check for errors
         if (snapshot.hasError) {
-          return MaterialApp(home: Text('Something went wrong!!!'));
+          return MaterialApp(home: ErrorScreen());
         }
 
         // Once complete, show your application
