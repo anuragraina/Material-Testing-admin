@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import '../../services/database.dart';
+import '../../widgets/pending_test_detail.dart';
 
 class PendingTests extends StatelessWidget {
   final DatabaseService _db = DatabaseService();
@@ -27,22 +28,24 @@ class PendingTests extends StatelessWidget {
             padding: EdgeInsets.all(10),
             child: ListView(
               children: snapshot.data.documents.map<Widget>((document) {
-                DateTime time = DateTime.fromMicrosecondsSinceEpoch(
-                    document.data()['created_on'].microsecondsSinceEpoch);
+                final data = document.data();
+                final time =
+                    DateTime.fromMicrosecondsSinceEpoch(data['created_on'].microsecondsSinceEpoch);
 
-                String formattedTime = DateFormat('d MMM, yyyy – hh:mm aaa').format(time);
+                data['created_on'] = DateFormat('d MMM, yyyy – hh:mm aaa').format(time);
 
                 return Card(
                   child: ListTile(
-                    title: Text(document.data()['test_name']),
-                    subtitle: Text(document.data()['test_category']),
+                    title: Text(data['test_name']),
+                    subtitle: Text(data['test_category']),
                     trailing: Text(
-                      formattedTime,
+                      data['created_on'],
                       style: TextStyle(
                         color: Colors.grey[600],
                         fontStyle: FontStyle.italic,
                       ),
                     ),
+                    onTap: () => modalBottomSheet(context, data),
                   ),
                   margin: EdgeInsets.symmetric(vertical: 10, horizontal: 25),
                 );
