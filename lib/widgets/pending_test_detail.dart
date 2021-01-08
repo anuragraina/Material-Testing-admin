@@ -1,6 +1,15 @@
 import 'package:flutter/material.dart';
 
+import '../services/database.dart';
+
 void modalBottomSheet(BuildContext context, Map data) {
+  final DatabaseService _database = DatabaseService();
+
+  void _approveTest(BuildContext ctx, Map data) {
+    _database.addTest(data);
+    Navigator.of(context).pop();
+  }
+
   showModalBottomSheet(
       context: context,
       shape: RoundedRectangleBorder(
@@ -119,7 +128,7 @@ void modalBottomSheet(BuildContext context, Map data) {
                     ),
                     RaisedButton(
                       child: Text('Approve'),
-                      onPressed: () => {},
+                      onPressed: () => _approveTest(context, data),
                       color: Colors.blueAccent,
                       textColor: Colors.white,
                     )
