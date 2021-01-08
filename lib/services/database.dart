@@ -10,6 +10,10 @@ class DatabaseService {
     return _newTests.snapshots();
   }
 
+  Stream getApprovedRecords() {
+    return _approvedTests.snapshots();
+  }
+
   //respond if addition was successful or not
   void addTest(Map data) async {
     try {

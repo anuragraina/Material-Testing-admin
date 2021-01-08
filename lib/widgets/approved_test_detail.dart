@@ -1,15 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../services/database.dart';
-
 void modalBottomSheet(BuildContext context, Map data) {
-  final DatabaseService _database = DatabaseService();
-
-  void _approveTest(BuildContext ctx, Map data) {
-    _database.addTest(data);
-    Navigator.of(context).pop();
-  }
-
   showModalBottomSheet(
       context: context,
       shape: RoundedRectangleBorder(
@@ -53,6 +44,26 @@ void modalBottomSheet(BuildContext context, Map data) {
                 child: Row(
                   children: [
                     Text(
+                      'Approved On: ',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(
+                      data['approved_on'],
+                      style: TextStyle(
+                        fontSize: 16,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                padding: EdgeInsets.only(top: 20),
+                child: Row(
+                  children: [
+                    Text(
                       'Created On: ',
                       style: TextStyle(
                         fontSize: 16,
@@ -61,6 +72,26 @@ void modalBottomSheet(BuildContext context, Map data) {
                     ),
                     Text(
                       data['created_on'],
+                      style: TextStyle(
+                        fontSize: 16,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                padding: EdgeInsets.only(top: 20),
+                child: Row(
+                  children: [
+                    Text(
+                      'Approved By: ',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(
+                      'Admin',
                       style: TextStyle(
                         fontSize: 16,
                       ),
@@ -119,20 +150,9 @@ void modalBottomSheet(BuildContext context, Map data) {
               ),
               Padding(
                 padding: const EdgeInsets.all(20),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    TextButton(
-                      child: Text('Cancel'),
-                      onPressed: () => Navigator.of(context).pop(),
-                    ),
-                    RaisedButton(
-                      child: Text('Approve'),
-                      onPressed: () => _approveTest(context, data),
-                      color: Colors.blueAccent,
-                      textColor: Colors.white,
-                    )
-                  ],
+                child: TextButton(
+                  child: Text('OK'),
+                  onPressed: () => Navigator.of(context).pop(),
                 ),
               )
             ],
