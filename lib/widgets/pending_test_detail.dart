@@ -9,11 +9,11 @@ void modalBottomSheet(BuildContext context, Map data) {
       builder: (BuildContext context) {
         return Container(
           padding: EdgeInsets.all(15),
-          height: 350,
-          child: Column(
+          child: ListView(
             children: [
               Text(
                 data['test_name'],
+                textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
@@ -83,29 +83,49 @@ void modalBottomSheet(BuildContext context, Map data) {
                 padding: const EdgeInsets.all(15),
                 child: Text(
                   'Values',
+                  textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
-              // Table(
-              //   border: TableBorder.all(),
-              //   children: [
-              //     for (var property in data.values)
-              //       TableRow(children: [
-              //         TableCell(
-              //           child: Row(
-              //             mainAxisAlignment: MainAxisAlignment.spaceAround,
-              //             children: <Widget>[
-              //               new Text(property),
-              //               new Text('c'),
-              //             ],
-              //           ),
-              //         )
-              //       ])
-              //   ],
-              // ),
+              Table(
+                border: TableBorder.all(),
+                children: [
+                  for (var item in data['values'].keys)
+                    TableRow(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Center(child: Text(item.toString())),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Center(child: Text(data['values'][item].toString())),
+                        ),
+                      ],
+                    ),
+                ],
+              ),
+              Padding(
+                padding: const EdgeInsets.all(20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    TextButton(
+                      child: Text('Cancel'),
+                      onPressed: () => Navigator.of(context).pop(),
+                    ),
+                    RaisedButton(
+                      child: Text('Approve'),
+                      onPressed: () => {},
+                      color: Colors.blueAccent,
+                      textColor: Colors.white,
+                    )
+                  ],
+                ),
+              )
             ],
           ),
         );
