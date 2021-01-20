@@ -5,6 +5,7 @@ class DatabaseService {
   final AuthService _auth = AuthService();
   final CollectionReference _newTests = FirebaseFirestore.instance.collection('newTests');
   final CollectionReference _approvedTests = FirebaseFirestore.instance.collection('approvedTests');
+  final CollectionReference _sites = FirebaseFirestore.instance.collection('sites');
 
   Stream getPendingRecords() {
     return _newTests.snapshots();
@@ -26,6 +27,15 @@ class DatabaseService {
       print(addResult);
       await _newTests.doc(data['id']).delete();
       print('deleted');
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
+  void addSite(String name, String location) async {
+    try {
+      DocumentReference addResult = await _sites.add({'name': name, 'location': location});
+      print(addResult);
     } catch (e) {
       print(e.toString());
     }
