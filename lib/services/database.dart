@@ -15,6 +15,15 @@ class DatabaseService {
     return _approvedTests.snapshots();
   }
 
+  Stream getSites() {
+    return _sites.snapshots();
+  }
+
+  void deleteSite(String id) async {
+    await _sites.doc(id).delete();
+    print('Site Deleted');
+  }
+
   //respond if addition was successful or not
   void addTest(Map data) async {
     try {
@@ -32,12 +41,14 @@ class DatabaseService {
     }
   }
 
-  void addSite(String name, String location) async {
+  Future addSite(String name, String location) async {
     try {
-      DocumentReference addResult = await _sites.add({'name': name, 'location': location});
+      DocumentReference addResult = await _sites.add({'site_name': name, 'location': location});
       print(addResult);
+      return addResult;
     } catch (e) {
       print(e.toString());
+      return null;
     }
   }
 }

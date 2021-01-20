@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 
 import '../../services/auth.dart';
-import '../../screens/error_screen.dart';
+// import '../../screens/error_screen.dart';
+import '../../widgets/sign_in_error_alert.dart';
 
 class SignIn extends StatefulWidget {
   @override
@@ -91,13 +92,13 @@ class _SignInState extends State<SignIn> {
                         ),
                       ),
                       onPressed: () async {
-                        try {
-                          await pr.show();
-                          dynamic result = await _auth.signIn(email, password);
-                          print(result.uid);
-                          await pr.hide();
-                        } catch (e) {
-                          return ErrorScreen();
+                        await pr.show();
+                        dynamic result = await _auth.signIn(email, password);
+                        print(result);
+                        await pr.hide();
+                        if (result == null) {
+                          //Create Alertbox
+                          showAlertDialog(context);
                         }
                       },
                     )
