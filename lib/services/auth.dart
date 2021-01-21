@@ -14,6 +14,15 @@ class AuthService {
     return _auth.authStateChanges().map(_createUser);
   }
 
+  //Reset Password
+  Future resetPassword(String email) async {
+    try {
+      return await _auth.sendPasswordResetEmail(email: email);
+    } catch (e) {
+      print(e);
+    }
+  }
+
 //Sign in the user
   Future signIn(String email, String password) async {
     try {
