@@ -129,7 +129,7 @@ void modalBottomSheet(BuildContext context, Map data) {
                     RaisedButton(
                       child: Text('Approve'),
                       onPressed: () => _approveTest(context, data),
-                      color: Colors.blueAccent,
+                      color: Theme.of(context).primaryColor,
                       textColor: Colors.white,
                     )
                   ],

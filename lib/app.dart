@@ -24,9 +24,9 @@ class App extends StatelessWidget {
       child: MaterialApp(
           title: 'Final Year Project',
           theme: ThemeData(
-            primarySwatch: Colors.blue,
+            primarySwatch: Colors.deepOrange,
             visualDensity: VisualDensity.adaptivePlatformDensity,
-            backgroundColor: Colors.blue.shade50,
+            backgroundColor: Colors.purple.shade50,
           ),
           home: Wrapper(),
           //home: MyHomePage(title: 'Final Year Project'),
