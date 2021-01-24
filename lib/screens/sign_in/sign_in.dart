@@ -34,7 +34,7 @@ class _SignInState extends State<SignIn> {
 
       /// your body here
       customBody: LinearProgressIndicator(
-        valueColor: AlwaysStoppedAnimation<Color>(Colors.deepOrange),
+        valueColor: AlwaysStoppedAnimation<Color>(Theme.of(context).primaryColor),
         backgroundColor: Theme.of(context).backgroundColor,
       ),
     );
@@ -127,13 +127,16 @@ class _SignInState extends State<SignIn> {
                         },
                       ),
                     ),
-                    TextButton(
-                      child: Text(
-                        'Forgot Password?',
+                    Container(
+                      margin: EdgeInsets.symmetric(horizontal: 100),
+                      child: TextButton(
+                        child: Text(
+                          'Forgot Password?',
+                        ),
+                        onPressed: () {
+                          resetPassword(context);
+                        },
                       ),
-                      onPressed: () {
-                        resetPassword(context);
-                      },
                     ),
                   ],
                 ),

@@ -8,12 +8,12 @@ import '../../services/database.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 import '../../widgets/delete_site_confirmation.dart';
 
-class ManageSites extends StatefulWidget {
+class ManageUsers extends StatefulWidget {
   @override
-  _ManageSitesState createState() => _ManageSitesState();
+  _ManageUsersState createState() => _ManageUsersState();
 }
 
-class _ManageSitesState extends State<ManageSites> {
+class _ManageUsersState extends State<ManageUsers> {
   final DatabaseService _db = DatabaseService();
   final AuthService _auth = AuthService();
 
@@ -129,7 +129,7 @@ class _ManageSitesState extends State<ManageSites> {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Manage Sites'),
+          title: Text('Manage Users'),
           actions: <Widget>[
             FlatButton.icon(
               textColor: Colors.white,
