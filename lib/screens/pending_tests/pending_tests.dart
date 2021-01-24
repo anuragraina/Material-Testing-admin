@@ -27,7 +27,7 @@ class PendingTests extends StatelessWidget {
           return Padding(
             padding: EdgeInsets.all(10),
             child: ListView(
-              children: snapshot.data.documents.map<Widget>((document) {
+              children: snapshot.data.docs.map<Widget>((document) {
                 final data = document.data();
                 final time =
                     DateTime.fromMicrosecondsSinceEpoch(data['created_on'].microsecondsSinceEpoch);

@@ -1,6 +1,7 @@
 //CHange the folder name
 
 import 'package:flutter/material.dart';
+import 'package:cloud_functions/cloud_functions.dart';
 
 import '../../services/auth.dart';
 // import '../../widgets/test_type.dart';
@@ -158,7 +159,7 @@ class _ManageUsersState extends State<ManageUsers> {
             return Padding(
               padding: EdgeInsets.all(10),
               child: ListView(
-                children: snapshot.data.documents.map<Widget>((document) {
+                children: snapshot.data.docs.map<Widget>((document) {
                   final data = document.data();
                   // final time =
                   //     DateTime.fromMicrosecondsSinceEpoch(data['approved_on'].microsecondsSinceEpoch);
@@ -182,7 +183,11 @@ class _ManageUsersState extends State<ManageUsers> {
           },
         ),
         floatingActionButton: FloatingActionButton(
-          onPressed: () => addSite(context),
+          onPressed: () async {
+            HttpsCallable callable = FirebaseFunctions.instance.httpsCallable('createUser');
+
+            await callable({'name': 'sas'});
+          },
           child: Icon(Icons.add),
           backgroundColor: Theme.of(context).primaryColor,
         ),
