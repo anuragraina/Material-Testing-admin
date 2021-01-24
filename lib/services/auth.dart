@@ -1,3 +1,5 @@
+//Delete create user function, since it already exists in users.dart
+
 import 'package:firebase_auth/firebase_auth.dart';
 
 import '../models/user.dart';
