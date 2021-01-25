@@ -1,15 +1,15 @@
-//CHange the folder name
+// ignore: todo
+//TODO - Add update & delete functionality
 
 import 'package:flutter/material.dart';
 
 import '../../services/auth.dart';
-import '../../services/database.dart';
-import '../../widgets/delete_site_confirmation.dart';
+import '../../services/users.dart';
 import 'add_user.dart';
 
 class ManageUsers extends StatelessWidget {
-  final DatabaseService _db = DatabaseService();
   final AuthService _auth = AuthService();
+  final UserService _user = UserService();
 
   @override
   Widget build(BuildContext context) {
@@ -38,8 +38,8 @@ class ManageUsers extends StatelessWidget {
             )
           ],
         ),
-        body: StreamBuilder(
-          stream: _db.getSites(),
+        body: FutureBuilder(
+          future: _user.getUsers(),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             if (snapshot.hasError) {
               return Text('Something went wrong');
@@ -52,16 +52,14 @@ class ManageUsers extends StatelessWidget {
             return Padding(
               padding: EdgeInsets.all(10),
               child: ListView(
-                children: snapshot.data.docs.map<Widget>((document) {
-                  final data = document.data();
-
+                children: snapshot.data.map<Widget>((user) {
                   return Card(
                     child: ListTile(
-                        title: Text(data['site_name']),
-                        subtitle: Text(data['location']),
+                        title: Text(user['email']),
+                        subtitle: user['name'] == null ? Text('Not defined') : Text(user['name']),
                         trailing: IconButton(
                           icon: Icon(Icons.delete),
-                          onPressed: () => showAlertDeleteSite(context, document.id),
+                          onPressed: () {},
                           color: Colors.red,
                         )),
                     margin: EdgeInsets.symmetric(vertical: 10, horizontal: 25),
