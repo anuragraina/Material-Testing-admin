@@ -21,7 +21,7 @@ class PendingTests extends StatelessWidget {
           }
 
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: Text("Loading"));
+            return Center(child: CircularProgressIndicator());
           }
 
           return Padding(
