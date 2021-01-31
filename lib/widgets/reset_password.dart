@@ -12,7 +12,13 @@ class ResetPass extends StatefulWidget {
 class _ResetPassState extends State<ResetPass> {
   final AuthService _auth = AuthService();
 
+  var _formKey = GlobalKey<FormState>();
+
   String email = '';
+
+  static String emailPattern =
+      r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+";
+  RegExp regExp = new RegExp(emailPattern);
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +30,7 @@ class _ResetPassState extends State<ResetPass> {
 
       /// your body here
       customBody: LinearProgressIndicator(
-        valueColor: AlwaysStoppedAnimation<Color>(Colors.deepOrange),
+        valueColor: AlwaysStoppedAnimation<Color>(Theme.of(context).primaryColor),
         backgroundColor: Theme.of(context).backgroundColor,
       ),
     );
@@ -43,14 +49,29 @@ class _ResetPassState extends State<ResetPass> {
           children: [
             Container(
               width: 325,
-              child: ListTile(
-                leading: const Icon(Icons.email),
-                title: TextFormField(
-                  onChanged: (value) {
-                    setState(() => email = value);
-                  },
-                  decoration: InputDecoration(
-                    hintText: 'Enter email',
+              child: Form(
+                key: _formKey,
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+                child: ListTile(
+                  leading: const Icon(Icons.email),
+                  title: TextFormField(
+                    keyboardType: TextInputType.emailAddress,
+                    validator: (String value) {
+                      if (value.isEmpty) {
+                        return 'Please enter email';
+                      } else if (!regExp.hasMatch(value)) {
+                        return 'Please enter valid email';
+                      } else {
+                        return null;
+                      }
+                    },
+                    onChanged: (value) {
+                      setState(() => email = value);
+                    },
+                    decoration: InputDecoration(
+                      hintText: 'Enter email',
+                      errorStyle: TextStyle(fontSize: 15),
+                    ),
                   ),
                 ),
               ),
@@ -68,11 +89,13 @@ class _ResetPassState extends State<ResetPass> {
                   ),
                 ),
                 onPressed: () async {
-                  await pr.show();
-                  dynamic result = await _auth.resetPassword(email);
-                  print(result);
-                  await pr.hide();
-                  showAlertResetLinkSent(context, email);
+                  if (_formKey.currentState.validate()) {
+                    await pr.show();
+                    dynamic result = await _auth.resetPassword(email);
+                    print(result);
+                    await pr.hide();
+                    showAlertResetLinkSent(context, email);
+                  }
                 },
               ),
             ),

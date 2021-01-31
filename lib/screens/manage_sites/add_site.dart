@@ -11,6 +11,8 @@ class AddSite extends StatefulWidget {
 class _AddSiteState extends State<AddSite> {
   final DatabaseService _db = DatabaseService();
 
+  var _formKey = GlobalKey<FormState>();
+
   String name = '';
   String location = '';
 
@@ -30,54 +32,76 @@ class _AddSiteState extends State<AddSite> {
     );
     return Padding(
       padding: EdgeInsets.all(40),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          Container(
-            margin: EdgeInsets.only(bottom: 30),
-            width: 325,
-            child: TextField(
-              onChanged: (value) {
-                setState(() => name = value);
-              },
-              decoration: InputDecoration(
-                hintText: 'Enter site name',
-              ),
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.only(bottom: 30),
-            width: 325,
-            child: TextField(
-              onChanged: (value) {
-                setState(() => location = value);
-              },
-              decoration: InputDecoration(
-                hintText: 'Enter location',
-              ),
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
-            child: RaisedButton(
-              color: Theme.of(context).primaryColor,
-              textColor: Colors.white,
-              child: Text(
-                'Add Site',
-                style: TextStyle(
-                  fontSize: 16,
+      child: Form(
+        key: _formKey,
+        autovalidateMode: AutovalidateMode.onUserInteraction,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Container(
+              margin: EdgeInsets.only(bottom: 30),
+              width: 325,
+              child: TextFormField(
+                validator: (String value) {
+                  if (value.isEmpty) {
+                    return 'Please enter site name';
+                  } else {
+                    return null;
+                  }
+                },
+                onChanged: (value) {
+                  setState(() => name = value);
+                },
+                decoration: InputDecoration(
+                  hintText: 'Enter site name',
+                  errorStyle: TextStyle(fontSize: 15),
                 ),
               ),
-              onPressed: () async {
-                await pr.show();
-                dynamic result = await _db.addSite(name, location);
-                print(result);
-                await pr.hide();
-                Navigator.of(context).pop();
-              },
             ),
-          )
-        ],
+            Container(
+              margin: EdgeInsets.only(bottom: 30),
+              width: 325,
+              child: TextFormField(
+                validator: (String value) {
+                  if (value.isEmpty) {
+                    return 'Please enter location';
+                  } else {
+                    return null;
+                  }
+                },
+                onChanged: (value) {
+                  setState(() => location = value);
+                },
+                decoration: InputDecoration(
+                  hintText: 'Enter location',
+                  errorStyle: TextStyle(fontSize: 15),
+                ),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+              child: RaisedButton(
+                color: Theme.of(context).primaryColor,
+                textColor: Colors.white,
+                child: Text(
+                  'Add Site',
+                  style: TextStyle(
+                    fontSize: 16,
+                  ),
+                ),
+                onPressed: () async {
+                  if (_formKey.currentState.validate()) {
+                    await pr.show();
+                    dynamic result = await _db.addSite(name, location);
+                    print(result);
+                    await pr.hide();
+                    Navigator.of(context).pop();
+                  }
+                },
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

@@ -11,12 +11,18 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
+  var _formKey = GlobalKey<FormState>();
+
   final AuthService _auth = AuthService();
 
   bool _obscureText = true;
 
   String email = '';
   String password = '';
+
+  static String emailPattern =
+      r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+";
+  RegExp regExp = new RegExp(emailPattern);
 
   void _toggle() {
     setState(() {
@@ -57,9 +63,10 @@ class _SignInState extends State<SignIn> {
           child: Container(
             margin: EdgeInsets.only(top: 30),
             child: Form(
+              key: _formKey,
+              autovalidateMode: AutovalidateMode.onUserInteraction,
               child: Center(
                 child: ListView(
-                  // crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
                     SizedBox(height: 20.0),
                     Container(
@@ -67,11 +74,23 @@ class _SignInState extends State<SignIn> {
                       child: ListTile(
                         leading: const Icon(Icons.email),
                         title: TextFormField(
+                          // maxLength: 32,
+                          keyboardType: TextInputType.emailAddress,
+                          validator: (String value) {
+                            if (value.isEmpty) {
+                              return 'Please enter email';
+                            } else if (!regExp.hasMatch(value)) {
+                              return 'Please enter valid email';
+                            } else {
+                              return null;
+                            }
+                          },
                           onChanged: (value) {
                             setState(() => email = value);
                           },
                           decoration: InputDecoration(
                             hintText: 'Enter email',
+                            errorStyle: TextStyle(fontSize: 15),
                           ),
                         ),
                       ),
@@ -83,11 +102,19 @@ class _SignInState extends State<SignIn> {
                         leading: Icon(Icons.lock),
                         title: TextFormField(
                           obscureText: _obscureText,
+                          validator: (String value) {
+                            if (value.isEmpty) {
+                              return 'Please enter password';
+                            } else {
+                              return null;
+                            }
+                          },
                           onChanged: (value) {
                             setState(() => password = value);
                           },
                           decoration: InputDecoration(
                             hintText: 'Enter password',
+                            errorStyle: TextStyle(fontSize: 15),
                             suffix: IconButton(
                               padding: EdgeInsets.zero,
                               constraints: BoxConstraints(),
@@ -116,13 +143,15 @@ class _SignInState extends State<SignIn> {
                           ),
                         ),
                         onPressed: () async {
-                          await pr.show();
-                          dynamic result = await _auth.signIn(email, password);
-                          print(result);
-                          await pr.hide();
-                          if (result == null) {
-                            //Create Alertbox
-                            showAlertDialog(context);
+                          if (_formKey.currentState.validate()) {
+                            await pr.show();
+                            dynamic result = await _auth.signIn(email, password);
+                            print(result);
+                            await pr.hide();
+                            if (result == null) {
+                              //Create Alertbox
+                              showAlertDialog(context);
+                            }
                           }
                         },
                       ),
