@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
-import '../services/database.dart';
 
-showAlertDeleteSite(BuildContext context, String id) {
-  final DatabaseService _db = DatabaseService();
+import '../../services/users.dart';
+
+showAlertDeleteUser(BuildContext context, String uid) {
+  final UserService _user = UserService();
   showDialog(
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-        title: Text("Do you want to delete the site?"),
+        title: Text("Do you want to delete the user?"),
         content: Text(
-            "This will delete the site permanently from the database. Proceed only if you are sure"),
+            "This will permanently delete the user from the database. Proceed only if you are sure"),
         actions: [
           TextButton(
             child: Text("Cancel"),
@@ -20,9 +21,10 @@ showAlertDeleteSite(BuildContext context, String id) {
               'DELETE',
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
-            onPressed: () => {
-              _db.deleteSite(id),
-              Navigator.of(context).pop(),
+            onPressed: () async {
+              dynamic result = await _user.deleteUser(uid);
+              print(result);
+              Navigator.of(context).pop();
             },
           ),
         ],

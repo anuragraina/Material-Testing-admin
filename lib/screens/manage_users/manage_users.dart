@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 
 import '../../services/auth.dart';
 import '../../services/users.dart';
-import 'add_user.dart';
+import './add_user.dart';
+import './delete_user_confirmation.dart';
 
 class ManageUsers extends StatelessWidget {
   final AuthService _auth = AuthService();
@@ -59,7 +60,7 @@ class ManageUsers extends StatelessWidget {
                         subtitle: user['name'] == null ? Text('Not defined') : Text(user['name']),
                         trailing: IconButton(
                           icon: Icon(Icons.delete),
-                          onPressed: () {},
+                          onPressed: () => showAlertDeleteUser(context, user['uid']),
                           color: Colors.red,
                         )),
                     margin: EdgeInsets.symmetric(vertical: 10, horizontal: 25),

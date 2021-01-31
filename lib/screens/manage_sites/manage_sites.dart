@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../../services/auth.dart';
 import '../../services/database.dart';
-import '../../widgets/delete_site_confirmation.dart';
+import './delete_site_confirmation.dart';
 import './add_site.dart';
 
 class ManageSites extends StatelessWidget {

@@ -19,7 +19,7 @@ class UserService {
     }
   }
 
-  Future getUsers({String name, String email, String mobile}) async {
+  Future getUsers() async {
     try {
       HttpsCallable callable = FirebaseFunctions.instanceFor(region: 'asia-south1').httpsCallable(
         'getUsers',
@@ -28,7 +28,21 @@ class UserService {
 
       return result.data;
     } catch (e) {
-      print('Create User Error: $e');
+      print('Get Users Error: $e');
+      return 'error';
+    }
+  }
+
+  Future deleteUser(String uid) async {
+    try {
+      HttpsCallable callable = FirebaseFunctions.instanceFor(region: 'asia-south1').httpsCallable(
+        'deleteUser',
+      );
+      HttpsCallableResult result = await callable(uid);
+
+      return result.data;
+    } catch (e) {
+      print('Delete User Error: $e');
       return 'error';
     }
   }
