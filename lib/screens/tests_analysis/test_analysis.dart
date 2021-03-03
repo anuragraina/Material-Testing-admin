@@ -31,7 +31,7 @@ class TestAnalysis extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            TestType(name: 'Pending Tests', route: '/pending-tests'),
+            TestType(name: 'Pending Tests', route: '/pending-tests/users'),
             TestType(name: 'Approved Tests', route: '/approved-tests'),
           ],
         ),

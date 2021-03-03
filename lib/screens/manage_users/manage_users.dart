@@ -56,13 +56,14 @@ class ManageUsers extends StatelessWidget {
                 children: snapshot.data.map<Widget>((user) {
                   return Card(
                     child: ListTile(
-                        title: Text(user['email']),
-                        subtitle: user['name'] == null ? Text('Not defined') : Text(user['name']),
-                        trailing: IconButton(
-                          icon: Icon(Icons.delete),
-                          onPressed: () => showAlertDeleteUser(context, user['uid']),
-                          color: Colors.red,
-                        )),
+                      title: user['name'] == null ? Text('Not defined') : Text(user['name']),
+                      subtitle: Text(user['email']),
+                      trailing: IconButton(
+                        icon: Icon(Icons.delete),
+                        onPressed: () => showAlertDeleteUser(context, user['uid']),
+                        color: Colors.red,
+                      ),
+                    ),
                     margin: EdgeInsets.symmetric(vertical: 10, horizontal: 25),
                   );
                 }).toList(),
