@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../services/database.dart';
-import '../widgets/test_detail.dart';
+import '../../services/database.dart';
+import '../../widgets/test_detail.dart';
 
 void modalBottomSheet(BuildContext context, Map data, String userUid) {
   final DatabaseService _db = DatabaseService();

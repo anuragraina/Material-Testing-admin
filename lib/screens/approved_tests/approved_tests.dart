@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import '../../services/database.dart';
-import '../../widgets/approved_test_detail.dart';
+import './approved_test_detail.dart';
 
 class ApprovedTests extends StatelessWidget {
   final DatabaseService _db = DatabaseService();
@@ -35,10 +35,11 @@ class ApprovedTests extends StatelessWidget {
             child: ListView(
               children: snapshot.data.docs.map<Widget>((document) {
                 final data = document.data();
-                final time =
+
+                final approvedOn =
                     DateTime.fromMicrosecondsSinceEpoch(data['approved_on'].microsecondsSinceEpoch);
 
-                data['approved_on'] = DateFormat('d MMM, yyyy – hh:mm aaa').format(time);
+                data['approved_on'] = DateFormat('d MMM, yyyy – hh:mm aaa').format(approvedOn);
 
                 return Card(
                   child: ListTile(

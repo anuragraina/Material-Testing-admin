@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import '../../services/database.dart';
-import '../../widgets/pending_test_detail.dart';
+import './pending_test_detail.dart';
 
 class PendingTests extends StatelessWidget {
   final DatabaseService _db = DatabaseService();
