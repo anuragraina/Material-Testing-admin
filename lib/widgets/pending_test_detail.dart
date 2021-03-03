@@ -4,7 +4,7 @@ import '../services/database.dart';
 import '../widgets/test_detail.dart';
 
 void modalBottomSheet(BuildContext context, Map data, String userUid) {
-  final DatabaseService _database = DatabaseService();
+  final DatabaseService _db = DatabaseService();
 
   showModalBottomSheet(
       context: context,
@@ -66,13 +66,15 @@ void modalBottomSheet(BuildContext context, Map data, String userUid) {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     TextButton(
-                      child: Text('Cancel'),
-                      onPressed: () => Navigator.of(context).pop(),
-                    ),
+                        child: Text('Reject'),
+                        onPressed: () {
+                          _db.rejectTest(data, userUid);
+                          Navigator.of(context).pop();
+                        }),
                     RaisedButton(
                       child: Text('Approve'),
                       onPressed: () {
-                        _database.addTest(data, userUid);
+                        _db.approveTest(data, userUid);
                         Navigator.of(context).pop();
                       },
                       color: Theme.of(context).primaryColor,

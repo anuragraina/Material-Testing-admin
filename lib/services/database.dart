@@ -15,7 +15,7 @@ class DatabaseService {
   }
 
   //respond if addition was successful or not
-  void addTest(Map data, String userUid) async {
+  void approveTest(Map data, String userUid) async {
     final CollectionReference pendingTests =
         FirebaseFirestore.instance.collection('users').doc(userUid).collection('new_tests');
     final CollectionReference approvedTests =
@@ -28,6 +28,18 @@ class DatabaseService {
         ...data,
       });
       print(addResult);
+      await pendingTests.doc(data['id']).delete();
+      print('deleted');
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
+  void rejectTest(Map data, String userUid) async {
+    final CollectionReference pendingTests =
+        FirebaseFirestore.instance.collection('users').doc(userUid).collection('new_tests');
+
+    try {
       await pendingTests.doc(data['id']).delete();
       print('deleted');
     } catch (e) {
