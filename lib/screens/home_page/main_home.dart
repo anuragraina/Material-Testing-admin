@@ -29,9 +29,9 @@ class MainHome extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            TestType(name: 'Test Analysis', route: './test-analysis'),
-            TestType(name: 'Manage Users', route: './manage-users'),
-            TestType(name: 'Manage Sites', route: './manage-sites'),
+            TestType(name: 'Test Analysis', route: '/test-analysis'),
+            TestType(name: 'Manage Users', route: '/manage-users'),
+            TestType(name: 'Manage Sites', route: '/manage-sites'),
           ],
         ),
       ),

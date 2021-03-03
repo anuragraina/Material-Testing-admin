@@ -32,7 +32,7 @@ class TestAnalysis extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             TestType(name: 'Pending Tests', route: '/pending-tests/users'),
-            TestType(name: 'Approved Tests', route: '/approved-tests'),
+            TestType(name: 'Approved Tests', route: '/approved-tests/users'),
           ],
         ),
       ),

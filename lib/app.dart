@@ -13,6 +13,7 @@ import './screens/wrapper.dart';
 import './screens/pending_tests/pending_tests.dart';
 import './screens/pending_tests/users.dart';
 import './screens/approved_tests/approved_tests.dart';
+import './screens/approved_tests/users.dart';
 
 class App extends StatelessWidget {
   @override
@@ -29,13 +30,14 @@ class App extends StatelessWidget {
           home: Wrapper(),
           //home: MyHomePage(title: 'Final Year Project'),
           routes: {
-            './main-home': (ctx) => MainHome(),
-            './test-analysis': (ctx) => TestAnalysis(),
-            './manage-users': (ctx) => ManageUsers(),
+            '/main-home': (ctx) => MainHome(),
+            '/test-analysis': (ctx) => TestAnalysis(),
+            '/manage-users': (ctx) => ManageUsers(),
             '/pending-tests/tests': (ctx) => PendingTests(),
             '/pending-tests/users': (ctx) => PendingTestUserList(),
-            '/approved-tests': (ctx) => ApprovedTests(),
-            './manage-sites': (ctx) => ManageSites(),
+            '/approved-tests/tests': (ctx) => ApprovedTests(),
+            '/approved-tests/users': (ctx) => ApprovedTestUserList(),
+            '/manage-sites': (ctx) => ManageSites(),
           }),
     );
   }
