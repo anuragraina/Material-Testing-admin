@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../services/database.dart';
+import '../widgets/test_detail.dart';
 
 void modalBottomSheet(BuildContext context, Map data, String userUid) {
   final DatabaseService _database = DatabaseService();
@@ -23,66 +24,13 @@ void modalBottomSheet(BuildContext context, Map data, String userUid) {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              Container(
-                padding: EdgeInsets.only(top: 20),
-                child: Row(
-                  children: [
-                    Text(
-                      'Test Category: ',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Text(
-                      data['test_category'],
-                      style: TextStyle(
-                        fontSize: 16,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                padding: EdgeInsets.only(top: 20),
-                child: Row(
-                  children: [
-                    Text(
-                      'Created On: ',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Text(
-                      data['created_on'],
-                      style: TextStyle(
-                        fontSize: 16,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                padding: EdgeInsets.only(top: 20),
-                child: Row(
-                  children: [
-                    Text(
-                      'Created By: ',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Text(
-                      'Emp 1',
-                      style: TextStyle(
-                        fontSize: 16,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+              TestDetail('Test Category: ', data['test_category']),
+              TestDetail('Created On: ', data['created_on']),
+              TestDetail('Site: ', data['site']),
+              TestDetail('Sample Source: ', data['sample_source']),
+              TestDetail('Sample UID: ', data['sample_uid']),
+              TestDetail('Date of receipt: ', data['date_of_receipt']),
+              TestDetail('Date of testing: ', data['date_of_testing']),
               Padding(
                 padding: const EdgeInsets.all(15),
                 child: Text(

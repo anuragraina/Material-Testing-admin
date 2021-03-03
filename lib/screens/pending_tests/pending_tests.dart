@@ -35,10 +35,16 @@ class PendingTests extends StatelessWidget {
             child: ListView(
               children: snapshot.data.docs.map<Widget>((document) {
                 final data = document.data();
-                final time =
+                final createdOn =
                     DateTime.fromMicrosecondsSinceEpoch(data['created_on'].microsecondsSinceEpoch);
+                final dateOfReceipt = DateTime.fromMicrosecondsSinceEpoch(
+                    data['date_of_receipt'].microsecondsSinceEpoch);
+                final dateOfTesting = DateTime.fromMicrosecondsSinceEpoch(
+                    data['date_of_testing'].microsecondsSinceEpoch);
 
-                data['created_on'] = DateFormat('d MMM, yyyy – hh:mm aaa').format(time);
+                data['created_on'] = DateFormat('d MMM, yyyy – hh:mm aaa').format(createdOn);
+                data['date_of_receipt'] = DateFormat('d MMM, yyyy').format(dateOfReceipt);
+                data['date_of_testing'] = DateFormat('d MMM, yyyy').format(dateOfTesting);
 
                 return Card(
                   child: ListTile(
