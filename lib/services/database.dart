@@ -3,13 +3,7 @@ import './auth.dart';
 
 class DatabaseService {
   final AuthService _auth = AuthService();
-  final CollectionReference _approvedTests =
-      FirebaseFirestore.instance.collection('approved_tests');
   final CollectionReference _sites = FirebaseFirestore.instance.collection('sites');
-
-  Stream getApprovedRecords() {
-    return _approvedTests.snapshots();
-  }
 
   Stream getSites() {
     return _sites.snapshots();
@@ -55,6 +49,13 @@ class DatabaseService {
   Stream getPendingTests(String uid) {
     final CollectionReference pendingTests =
         FirebaseFirestore.instance.collection('users').doc(uid).collection('new_tests');
+
+    return pendingTests.snapshots();
+  }
+
+  Stream getApprovedTests(String uid) {
+    final CollectionReference pendingTests =
+        FirebaseFirestore.instance.collection('users').doc(uid).collection('approved_tests');
 
     return pendingTests.snapshots();
   }
