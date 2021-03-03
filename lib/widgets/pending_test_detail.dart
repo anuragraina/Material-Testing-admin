@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../services/database.dart';
 
-void modalBottomSheet(BuildContext context, Map data) {
+void modalBottomSheet(BuildContext context, Map data, String userUid) {
   final DatabaseService _database = DatabaseService();
 
   showModalBottomSheet(
@@ -124,7 +124,7 @@ void modalBottomSheet(BuildContext context, Map data) {
                     RaisedButton(
                       child: Text('Approve'),
                       onPressed: () {
-                        _database.addTest(data);
+                        _database.addTest(data, userUid);
                         Navigator.of(context).pop();
                       },
                       color: Theme.of(context).primaryColor,

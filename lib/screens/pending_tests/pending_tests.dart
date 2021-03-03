@@ -51,7 +51,7 @@ class PendingTests extends StatelessWidget {
                         fontStyle: FontStyle.italic,
                       ),
                     ),
-                    onTap: () => modalBottomSheet(context, {'id': document.id, ...data}),
+                    onTap: () => modalBottomSheet(context, {'id': document.id, ...data}, userUid),
                   ),
                   margin: EdgeInsets.symmetric(vertical: 10, horizontal: 25),
                 );

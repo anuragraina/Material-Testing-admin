@@ -3,8 +3,8 @@ import './auth.dart';
 
 class DatabaseService {
   final AuthService _auth = AuthService();
-  final CollectionReference _newTests = FirebaseFirestore.instance.collection('newTests');
-  final CollectionReference _approvedTests = FirebaseFirestore.instance.collection('approvedTests');
+  final CollectionReference _approvedTests =
+      FirebaseFirestore.instance.collection('approved_tests');
   final CollectionReference _sites = FirebaseFirestore.instance.collection('sites');
 
   Stream getApprovedRecords() {
@@ -21,16 +21,20 @@ class DatabaseService {
   }
 
   //respond if addition was successful or not
-  void addTest(Map data) async {
+  void addTest(Map data, String userUid) async {
+    final CollectionReference pendingTests =
+        FirebaseFirestore.instance.collection('users').doc(userUid).collection('new_tests');
+    final CollectionReference approvedTests =
+        FirebaseFirestore.instance.collection('users').doc(userUid).collection('approved_tests');
     try {
       var user = _auth.currentUser();
-      DocumentReference addResult = await _approvedTests.add({
+      DocumentReference addResult = await approvedTests.add({
         'approved_by': user,
         'approved_on': FieldValue.serverTimestamp(),
         ...data,
       });
       print(addResult);
-      await _newTests.doc(data['id']).delete();
+      await pendingTests.doc(data['id']).delete();
       print('deleted');
     } catch (e) {
       print(e.toString());
