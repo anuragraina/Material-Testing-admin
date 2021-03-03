@@ -7,10 +7,6 @@ class DatabaseService {
   final CollectionReference _approvedTests = FirebaseFirestore.instance.collection('approvedTests');
   final CollectionReference _sites = FirebaseFirestore.instance.collection('sites');
 
-  Stream getPendingRecords() {
-    return _newTests.snapshots();
-  }
-
   Stream getApprovedRecords() {
     return _approvedTests.snapshots();
   }
@@ -50,5 +46,12 @@ class DatabaseService {
       print(e.toString());
       return null;
     }
+  }
+
+  Stream getPendingTests(String uid) {
+    final CollectionReference pendingTests =
+        FirebaseFirestore.instance.collection('users').doc(uid).collection('new_tests');
+
+    return pendingTests.snapshots();
   }
 }

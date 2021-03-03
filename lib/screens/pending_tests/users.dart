@@ -38,6 +38,10 @@ class PendingTestUserList extends StatelessWidget {
                     child: ListTile(
                       title: user['name'] == null ? Text('Not defined') : Text(user['name']),
                       subtitle: Text(user['email']),
+                      onTap: () => Navigator.of(context).pushNamed(
+                        '/pending-tests/tests',
+                        arguments: user['uid'],
+                      ),
                     ),
                     margin: EdgeInsets.symmetric(vertical: 10, horizontal: 25),
                   );

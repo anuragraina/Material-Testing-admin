@@ -9,12 +9,14 @@ class PendingTests extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final userUid = ModalRoute.of(context).settings.arguments as String;
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Pending Tests'),
       ),
       body: StreamBuilder(
-        stream: _db.getPendingRecords(),
+        stream: _db.getPendingTests(userUid),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.hasError) {
             return Text('Something went wrong');
@@ -22,6 +24,10 @@ class PendingTests extends StatelessWidget {
 
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(child: CircularProgressIndicator());
+          }
+
+          if (snapshot.data.docs.isEmpty) {
+            return Center(child: Text('No pending tests available'));
           }
 
           return Padding(
