@@ -42,24 +42,121 @@ void modalBottomSheet(BuildContext context, Map data, String userUid) {
                   ),
                 ),
               ),
-              Table(
-                border: TableBorder.all(),
-                children: [
-                  for (var item in data['values'].keys)
-                    TableRow(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Center(child: Text(item.toString())),
+              if (data['test_name'] != 'Gradation')
+                Table(
+                  border: TableBorder.all(),
+                  children: [
+                    for (var item in data['values'].keys)
+                      TableRow(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Center(child: Text(item.toString())),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Center(child: Text(data['values'][item].toString())),
+                          ),
+                        ],
+                      ),
+                  ],
+                )
+              else
+                Table(
+                  border: TableBorder.all(),
+                  children: [
+                    TableRow(children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Center(
+                            child: Text(
+                          'IS Sieve Size',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        )),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Center(
+                            child: Text(
+                          'Weight Retained (gm)',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        )),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Center(
+                            child: Text(
+                          'Cumulative Wt. Retained (gm)',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        )),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Center(
+                            child: Text(
+                          'Cumulative % Wt. Retained',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        )),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Center(
+                            child: Text(
+                          'Cumulative % Wt. Passing',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        )),
+                      ),
+                    ]),
+                    for (var item in data['values']['data'].keys)
+                      TableRow(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Center(
+                              child: Text(
+                                item.toString(),
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ),
+                          for (var detail in data['values']['data'][item].keys)
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Center(
+                                  child: Text(
+                                      data['values']['data'][item][detail].toStringAsFixed(3))),
+                            ),
+                        ],
+                      ),
+                  ],
+                ),
+              if (data['test_name'] == 'Gradation')
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    children: [
+                      Text(
+                        'Fineness Modulus : ',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Center(child: Text(data['values'][item].toString())),
-                        ),
-                      ],
-                    ),
-                ],
-              ),
+                      ),
+                      Text(data['values']['fineness_modulus'].toStringAsFixed(3))
+                    ],
+                  ),
+                ),
               Padding(
                 padding: const EdgeInsets.all(20),
                 child: Row(
@@ -82,7 +179,7 @@ void modalBottomSheet(BuildContext context, Map data, String userUid) {
                     )
                   ],
                 ),
-              )
+              ),
             ],
           ),
         );
